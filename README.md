@@ -1,5 +1,4 @@
 Might improve in the future
-
 # Nix Flake for installing and running Thorium Browser
 
 Refer to the [Thorium Browser](https://thorium.rocks/) website for more information.
@@ -48,3 +47,11 @@ environment.systemPackages = [
 ```
 
 Replace thorium-avx2 with your package of choice
+
+For now, you need nix-ld
+```bash
+nix-ld.enable = true;
+nix-ld.libraries = with pkgs; [
+  # pkgs you need for the program to run
+];
+```
