@@ -1,4 +1,5 @@
 Might improve in the future
+So far avx2 is only variant that is supported
 
 # Nix Flake for installing and running Thorium Browser
 
@@ -35,7 +36,7 @@ In your `flake.nix`, Add nix-thorium as a input
 }
 ```
 
-Then add @inputs on outputs:
+Then add `@inputs` before `:` on outputs like this:
 ```bash
 outputs = { nixpkgs, ... }@inputs:
 ```
