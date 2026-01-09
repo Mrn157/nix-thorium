@@ -44,6 +44,8 @@
       in
         pkgs.stdenv.mkDerivation {
           inherit pname version src;
+          nativeBuildInputs = [ pkgs.autoPatchelfHook ];
+          buildInputs = [ pkgs.glibc pkgs.glibc.out ];
           installPhase = ''
               mkdir -p $out/share/applications
               mkdir -p $out/share/icons/hicolor/scalable/apps
