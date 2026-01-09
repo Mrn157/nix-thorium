@@ -1,5 +1,4 @@
 Might improve in the future
-So far avx2 is only variant that is supported
 
 # Nix Flake for installing and running Thorium Browser
 
