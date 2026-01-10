@@ -37,7 +37,7 @@
         pname = "thorium-avx2";
         version = "138.0.7204.300";
         src = pkgs.fetchzip {
-          url = "https://github.com/Alex313031/thorium/releases/download/138.0.7204.300/thorium-browser_138.0.7204.300_AVX2.zip";
+          url = "https://github.com/Alex313031/thorium/releases/download/M138.0.7204.300/thorium-browser_138.0.7204.300_AVX2.zip";
           sha256 = "sha256-K8/eXXYn5hIOa/i4J1O5ARlbc9zQCblLEfm8BcK3zvo=";
           stripRoot = false;
         };
