@@ -35,7 +35,6 @@
       thorium-avx2 = let
         pkgs = import nixpkgs {system = "x86_64-linux";};
         pname = "thorium-avx2";
-        name = "thorium-avx2";
         version = "138.0.7204.300";
         src = pkgs.fetchurl {
           url = "https://github.com/Alex313031/thorium/releases/download/M138.0.7204.300/Thorium_Browser_138.0.7204.300_AVX2.AppImage";
@@ -49,7 +48,7 @@
             install -m 444 -D ${appimageContents}/thorium-browser.desktop $out/share/applications/thorium-browser.desktop
             install -m 444 -D ${appimageContents}/thorium.png $out/share/icons/hicolor/512x512/apps/thorium.png
             substituteInPlace $out/share/applications/thorium-browser.desktop \
-            --replace 'Exec=AppRun --no-sandbox %U' 'Exec=${name} %U'
+            --replace 'Exec=thorium --no-default-browser-check %U' 'Exec=${pname} --no-default-browser-check %U'
           '';
         };
 
@@ -77,7 +76,6 @@
       thorium-sse4 = let
         pkgs = import nixpkgs {system = "x86_64-linux";};
         pname = "thorium-sse4";
-        name = "thorium-sse4";
         version = "138.0.7204.300";
         src = pkgs.fetchurl {
           url = "https://github.com/Alex313031/thorium/releases/download/M138.0.7204.300/Thorium_Browser_138.0.7204.300_SSE4.AppImage";
@@ -91,7 +89,7 @@
             install -m 444 -D ${appimageContents}/thorium-browser.desktop $out/share/applications/thorium-browser.desktop
             install -m 444 -D ${appimageContents}/thorium.png $out/share/icons/hicolor/512x512/apps/thorium.png
             substituteInPlace $out/share/applications/thorium-browser.desktop \
-            --replace 'Exec=AppRun --no-sandbox %U' 'Exec=${name} %U'
+            --replace 'Exec=thorium --no-default-browser-check %U' 'Exec=${pname} --no-default-browser-check %U'
           '';
         };
 
