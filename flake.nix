@@ -36,34 +36,19 @@
         pkgs = import nixpkgs {system = "x86_64-linux";};
         pname = "thorium-avx2";
         version = "138.0.7204.300";
-        src = pkgs.fetchzip {
-          url = "https://github.com/Alex313031/thorium/releases/download/M138.0.7204.300/thorium-browser_138.0.7204.300_AVX2.zip";
-          sha256 = "sha256-K8/eXXYn5hIOa/i4J1O5ARlbc9zQCblLEfm8BcK3zvo=";
-          stripRoot = false;
+        src = pkgs.fetchurl {
+          url = "https://github.com/Alex313031/thorium/releases/download/M138.0.7204.300/Thorium_Browser_138.0.7204.300_AVX2.AppImage";
+          sha256 = "sha256-vpAAoZv8Ayg1AN0Uo9Ou8fX22hdhJnxHM1W6XrpwMww=";
         };
+        appimageContents = pkgs.appimageTools.extractType2 {inherit pname src;};
       in
-        pkgs.stdenv.mkDerivation {
+        pkgs.appimageTools.wrapType2 {
           inherit pname version src;
-          nativeBuildInputs = [ pkgs.autoPatchelfHook ];
-          buildInputs = [ pkgs.glibc pkgs.glibc.out ];
-          installPhase = ''
-              mkdir -p $out/share/applications
-              mkdir -p $out/share/icons/hicolor/scalable/apps
-              cp -r * $out/share/applications
-              rm -rf $out/thorium
-              cp -r ./thorium-portable.desktop $out/share/applications
-              mkdir -p $out/bin
-              cp thorium $out/bin/thorium-browser
-              cp -r * $out/bin/
-              rm -rf $out/bin/xdg-mime
-              rm -rf $out/bin/xdg-settings
-              rm -rf $out/bin/THORIUM-PORTABLE
-              sed -i 's|./thorium-browser|thorium-browser|' $out/share/applications/thorium-portable.desktop
-              sed -i 's|./thorium_shell|thorium_shell|' $out/share/applications/thorium-shell.desktop
-              mv $out/share/applications/thorium.svg $out/share/icons/hicolor/scalable/apps
-              mv $out/share/applications/thorium_shell.png $out/share/icons/hicolor/scalable/apps
-              sed -i 's|product_logo_256.png|thorium|' $out/share/applications/thorium-portable.desktop
-              sed -i 's|thorium_shell.png|thorium_shell|' $out/share/applications/thorium-shell.desktop
+          extraInstallCommands = ''
+            install -m 444 -D ${appimageContents}/thorium-browser.desktop $out/share/applications/thorium-browser.desktop
+            install -m 444 -D ${appimageContents}/thorium.png $out/share/icons/hicolor/512x512/apps/thorium.png
+            substituteInPlace $out/share/applications/thorium-browser.desktop \
+            --replace 'Exec=AppRun --no-sandbox %U' 'Exec=${pname} %U'
           '';
         };
 
