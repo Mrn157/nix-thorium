@@ -40,7 +40,7 @@
           url = "https://github.com/Alex313031/thorium/releases/download/M138.0.7204.300/Thorium_Browser_138.0.7204.300_AVX2.AppImage";
           sha256 = "sha256-vpAAoZv8Ayg1AN0Uo9Ou8fX22hdhJnxHM1W6XrpwMww=";
         };
-        appimageContents = pkgs.appimageTools.extractType2 {inherit pname src;};
+        appimageContents = pkgs.appimageTools.extractType2 {inherit pname version src;};
       in
         pkgs.appimageTools.wrapType2 {
           inherit pname version src;
